@@ -11,3 +11,4 @@ urlpatterns = [
     path('handlelogin/', views.handlelogin, name="handlelogin"),
     path('signup/', views.signup, name="signup"),
 ]
+

@@ -8,11 +8,6 @@ from django.contrib.auth.models import User
 from cart.views import Cart
 from .forms import *
 from .models import Contacts
-from django.contrib.auth.models import User
-from django.contrib.auth import login as dj_login
-from django.http.response import JsonResponse, HttpResponse
-from django.contrib.auth import authenticate, logout
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def product_list(request, category_slug=None):
@@ -38,7 +33,7 @@ def product_detail(request, id, slug):
         'product': product,
         'cart_product_form': cart_product_form
     }
-    return render(request, 'shop/product/detail.html', context)
+    return render(request, 'shops/product/detail.html', context)
 
 def contact(request):
     if request.method == "GET":
@@ -59,6 +54,41 @@ def contact(request):
 
 def feedback(request):
     return render(request, 'contact.html')
+
+@login_required(login_url='../../login/')
+def addUser(request):
+    name = 'Login and Register '
+    cart_id = request.session.get('cart_id')
+    context = {
+        'name': name
+    }
+
+    if request.method == 'POST':
+        uname = request.POST.get('uname')
+        email = request.POST.get('email')
+        pass1 = request.POST.get('pass1')
+        pass2 = request.POST.get('pass2')
+        if pass1 == pass2:
+
+            user = User.objects.create(
+                username=uname,
+                email=email,
+                password=pass1
+            )
+            if cart_id == None:
+                cart = Cart()
+                cart.user = user
+                cart.save()
+                cart_id = cart.id
+                request.session['cart_id'] = cart_id
+            cart = Cart.objects.get(pk=cart_id)
+            cart.user = user
+            cart.save()
+
+            messages.success(request, 'Featured Product Saved')
+            return redirect('Home')
+    else:
+        return render(request, 'adduser.html', context)
 
 
 def AddVariation(request):
@@ -98,6 +128,7 @@ def AddFeatured(request):
             messages.error(request, " Unsuccessfuly Adding Featured Product")
     else:
         return render(request, 'baseform.html', context)
+# Create your views here.
 
 
 

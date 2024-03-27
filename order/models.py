@@ -4,18 +4,12 @@ from shops.models import Product
 
 
 class Order(models.Model):
-    first_name = models.CharField(max_length=60)
-    last_name = models.CharField(max_length=60)
+    first_name = models.CharField(max_length=15)
+    last_name = models.CharField(max_length=15)
     email = models.EmailField()
-    phone_number = models.CharField(max_length=15)
-    county = models.CharField(max_length=30)
-    sub_county = models.CharField(max_length=30)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    paid = models.BooleanField(default=False)
-
-    class Meta:
-        ordering = ('-created', )
+    phone_number = models.CharField(max_length=10)
+    county = models.CharField(max_length=15)
+    sub_county = models.CharField(max_length=15)
 
     def __str__(self):
         return 'Order {}'.format(self.id)
