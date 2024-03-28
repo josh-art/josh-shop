@@ -12,8 +12,6 @@ urlpatterns = [
     url(r'^contact me/$', views.contact, name='Contact'),
     url(r'^add user/$', views.addUser, name='AddUser'),
     url(r'^reach me/$', views.feedback, name='reach'),
-    path('addvariation/', views.AddVariation, name='AddVariation'),
-    path('addfeatured/', views.AddFeatured, name='AddFeatured'),
 
 
 ]

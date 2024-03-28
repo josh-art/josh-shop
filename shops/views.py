@@ -91,43 +91,7 @@ def addUser(request):
         return render(request, 'adduser.html', context)
 
 
-def AddVariation(request):
-    name = 'Add Product Variation'
-    form = VariationForm(request.POST or None, request.FILES or None)
-    context = {
-        'name': name,
-        'form': form
-    }
-    if request.method == 'POST':
-        form = VariationForm(request.POST or None, request.FILES or None)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Product Variation Saved')
-            return redirect('AddVariation')
-        else:
-            messages.error(request, " Unsuccessfuly Adding Variation")
-    else:
-        return render(request, 'baseform.html', context)
 
-
-@login_required(login_url='../../login/')
-def AddFeatured(request):
-    name = 'Add Featured Product '
-    form = ProductFeaturedForm(request.POST or None)
-    context = {
-        'name': name,
-        'form': form
-    }
-    if request.method == 'POST':
-        form = ProductFeaturedForm(request.POST or None)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Featured Product Saved')
-            return redirect('AddFeatured')
-        else:
-            messages.error(request, " Unsuccessfuly Adding Featured Product")
-    else:
-        return render(request, 'baseform.html', context)
 # Create your views here.
 
 
