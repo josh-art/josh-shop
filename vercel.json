@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "josh-shop/wsgi.py",
+      "src": "ecommerce/wsgi.py",
       "use": "@vercel/python",
       "config": {
         "maxLamdaSize": "15mb", "runtime": "python3.9"}
@@ -22,7 +22,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "josh-shop/wsgi.py"
+      "dest": "ecommerce/wsgi.py"
     }
   ]
 }
