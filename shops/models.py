@@ -1,5 +1,4 @@
 from django.db import models
-from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
@@ -20,25 +19,6 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('shops:product_list_by_category', args=[self.slug])
-
-
-class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
-    name = models.CharField(max_length=15, db_index=True)
-    description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    available = models.BooleanField(default=True)
-    stock = models.PositiveIntegerField()
-    image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
-
-    class Meta:
-        ordering = ('name',)
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('shops:product_detail', args=[self.id, self.slug])
 
 
 

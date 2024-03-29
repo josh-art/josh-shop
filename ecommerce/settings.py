@@ -29,16 +29,13 @@ ALLOWED_HOSTS = ['.vercel.app', '*']
 # Application definition
 
 INSTALLED_APPS = [
-    'shops.apps.ShopsConfig',
-    'cart.apps.CartConfig',
-    'order.apps.OrderConfig',
-    'user.apps.UserConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'shops',
     'crispy_forms',
 
 ]
@@ -66,7 +63,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cart.context_processors.cart',
             ],
         },
     },
@@ -129,4 +125,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'products/')
 
-CART_SESSION_ID = 'cart'
+
